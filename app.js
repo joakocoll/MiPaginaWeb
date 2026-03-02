@@ -130,20 +130,21 @@
 
   function setupCvLink() {
     if (!cvLink) return;
-    cvLink.href = 'cv.pdf';
-    cvLink.setAttribute('download', 'cv.pdf');
+    // Apuntamos al nuevo nombre real del archivo
+    cvLink.href = 'JoaquinCollaudCV.pdf';
+    // El atributo download asegura que el reclutador lo guarde con este nombre
+    cvLink.setAttribute('download', 'Joaquín_Collaud_CV.pdf');
   }
 
   function checkCvAvailability() {
     if (!cvLink) return;
-    const cvPath = new URL(cvLink.href, window.location.href).href;
-    console.log('[CV] Ruta configurada:', cvPath);
-    fetch('cv.pdf', { method: 'HEAD' })
+    // Verificamos el archivo real que subiste
+    fetch('JoaquinCollaudCV.pdf', { method: 'HEAD' })
       .then(res => {
         if (res.ok) console.log('[CV] Archivo disponible: OK');
-        else console.warn('[CV] Archivo no encontrado (404). Verifica que cv.pdf esté en la raíz del sitio.');
+        else console.warn('[CV] No se encuentra JoaquinCollaudCV.pdf en la raíz.');
       })
-      .catch(() => console.warn('[CV] No se pudo verificar cv.pdf. Asegúrate de subir el archivo al servidor.'));
+      .catch(() => console.warn('[CV] Error de red al verificar el archivo.'));
   }
 
   function verifyCvOnSectionLoad() {
